@@ -18,7 +18,15 @@ export class DataGridListComponent implements OnInit {
 
   initData(): void {
     this.dataGridService.getAll().subscribe(
-      data => this.data = data.results
+      data =>  this.data = data.result    
+    )
+  }
+
+  delete(id: number): void {
+    console.log('del', id);
+
+    this.dataGridService.delete(id).subscribe(
+      data => console.log(data)
     )
   }
 

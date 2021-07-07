@@ -1,30 +1,57 @@
-<div class="data-grid">
+<div class="page-wrapper">
+    <div class="page-header">
+        <button class="page-header__action">Add Item</button>
+    </div>
+<div class="page-content">
 
-    <table class="table">
+    <table class="content-table">
 
-        <thead class="table__header">
+        <thead class="content-table__header">
 
-            <tr class="table__header__row">
-                <th class="table__header__row_cell">cowId</th>
-                <th class="table__header__row_cell">animalId</th>
-                <th class="table__header__row_cell">healthIndex</th>
-                <th class="table__header__row_cell">endDate</th>
-                <th class="table__header__row_cell">minValueDateTime</th>
-                <th class="table__header__row_cell">type</th>
-                <th class="table__header__row_cell">eventId</th>
-                <th class="table__header__row_cell">deletable</th>
-                <th class="table__header__row_cell">lactationNumber</th>
-                <th class="table__header__row_cell">daysInLactation</th>
-                <th class="table__header__row_cell">ageInDays</th>
-                <th class="table__header__row_cell">startDateTime</th>
-                <th class="table__header__row_cell">reportingDateTime</th>
+            <tr class="content-table__header__row">
+                <th>eventId</th>
+                <th>animalId</th>
+                <th>cowId</th>
+                <th>healthIndex</th>
+                <th>endDate</th>
+                <th>minValueDateTime</th>
+                <th>type</th>
+                <th>deletable</th>
+                <th>lactationNumber</th>
+                <th>daysInLactation</th>
+                <th>ageInDays</th>
+                <th>startDateTime</th>
+                <th>reportingDateTime</th>
+                <th>Actions</th>
             </tr>
         </thead>
 
         <tbody *ngFor=' let item of data' >
+            <tr>
+                <td>{{item.eventId}}</td>
+                <td>{{item.animalId}}</td>
+                <td>{{item.cowId}}</td>
+                <td>{{item.healthIndex}}</td>
+                <td>{{item.endDate}}</td>
+                <td>{{item.minValueDateTime}}</td>
+                <td>{{item.type}}</td>
+                <td>{{item.deletable}}</td>
+                <td>{{item.lactationNumber}}</td>
+                <td>{{item.daysInLactation}}</td>
+                <td>{{item.ageInDays}}</td>
+                <td>{{item.startDateTime}}</td>
+                <td>{{item.reportingDateTime}}</td>
+                <td class="actions">
+                    <button >Edit</button>
+                    <button (click)="delete(item.eventId)">Del</button>
+                </td>
+                
+            </tr>
 
         </tbody>
 
     </table>
+
+    </div>
 
 </div>
