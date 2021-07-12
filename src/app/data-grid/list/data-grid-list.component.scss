@@ -1,7 +1,10 @@
-.page-wrapper {
-  display: grid;
-  grid-template-rows: 32px 1fr;
+.grid {
+  width: 100%;
+  height: 100;
 
+  &__header {
+    padding-bottom: 5px;
+  }
 }
 
 table,
@@ -14,4 +17,21 @@ td {
 th,
 td {
   padding: 0 3px 0 3px;
+}
+
+.icons,
+.btn {
+  height: 24px;
+  width: 24px;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

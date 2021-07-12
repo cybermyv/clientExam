@@ -1,8 +1,8 @@
-<div class="page-wrapper">
-  <div class="page-header">
-    <button class="page-header__action" (click)="add()">Add New Row</button>
+<div class="grid">
+  <div class="grid__header">
+    <div class="btn" (click)="add()" title="Create new record"><img class="icons" src="@images/add.png" /></div>
   </div>
-  <div class="page-content">
+  <div class="grid__content">
     <table class="table">
       <thead>
         <tr>
@@ -80,8 +80,8 @@
             <td>{{item.isOutOfBreedingWindow}}</td>
             <td>{{item.calvingEase}}</td>
             <td class="actions">
-              <button (click)="delete(item.eventId)">Del</button>
-              <button (click)="switchEditMode(index)">Edit</button>
+              <div class="btn" (click)="delete(item.eventId)" title="Delete"><img class="icons" src="@images/delete.png" /></div>
+              <div class="btn" (click)="switchEditMode(index)" title="Edit"><img class="icons" src="@/images/edit.png" /></div>
             </td>          
           </ng-container>
           <ng-container *ngIf="enableEditIndex === index">
@@ -118,7 +118,7 @@
             <td><input type="text" [(ngModel)]="item.isOutOfBreedingWindow"></td>
             <td><input type="text" [(ngModel)]="item.calvingEase"></td>
             <td class="actions">
-              <button (click)="save(item)">Update</button>
+              <span class="btn" (click)="save(item)" title="Save"><img class="icons" src="@/images/save.png" /></span>
             </td>          
           </ng-container>        
         </tr>

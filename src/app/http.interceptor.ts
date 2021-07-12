@@ -1,11 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SERVICE } from './service.config';
-import * as data from './mock.json';
 import { of } from 'rxjs';
 import { IDataRecord } from './data.interface';
-
+import * as data from './mock.json';
 
 @Injectable()
 export class MockHttpCalIInterceptor implements HttpInterceptor {
@@ -20,23 +18,39 @@ export class MockHttpCalIInterceptor implements HttpInterceptor {
         this.records = JSON.parse(dataStore);
     }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {        
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        if (request.url === SERVICE.data.path) {
+        const localData = (this.records as any);
 
-            return of(new HttpResponse({ status: 200, body: (this.records as any)}));
+        if (request.method === 'GET') {
+            return of(new HttpResponse({ status: 200, body: localData }));
         }
-  
+
         if (request.method === 'DELETE') {
             const deletedId = request.body.id;
-            const localData = this.records as any;
-
             const result = localData.find(item => item.eventId === deletedId);
             const idx = localData.findIndex(item => item.eventId === deletedId);
             localData.splice(idx, 1);
             this.setDataToSorage(localData);
-
             return of(new HttpResponse({ status: 200, body: result }));
+        }
+
+        if (request.method === 'POST') {
+            const newData = request.body;
+            this.setDataToSorage([newData, ...localData]);
+
+            return of(new HttpResponse({ status: 200, body: newData }));
+        }
+
+        if (request.method === 'PUT') {
+            const editedData = request.body;
+            const updatedId = request.body.id;
+
+            const idx = localData.findIndex(item => item.eventId === updatedId);
+            localData.splice(idx, 1, editedData);
+            this.setDataToSorage(localData);
+
+            return of(new HttpResponse({ status: 200, body: editedData }));
         }
 
         return next.handle(request);
@@ -45,6 +59,4 @@ export class MockHttpCalIInterceptor implements HttpInterceptor {
     private setDataToSorage(data: IDataRecord[]): void {
         window.localStorage.setItem(this.DATA_STORE, JSON.stringify(data));
     }
-
-    
 }

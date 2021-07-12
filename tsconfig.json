@@ -3,7 +3,7 @@
   "compilerOptions": {
     "resolveJsonModule": true,
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -19,6 +19,9 @@
       "es2018",
       "dom"
     ]
+  },
+  "paths": {
+    "@images/*": [ "src/assets/images/*"],
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
