@@ -1,57 +1,129 @@
 <div class="page-wrapper">
-    <div class="page-header">
-        <button class="page-header__action">Add Item</button>
-    </div>
-<div class="page-content">
-
-    <table class="content-table">
-
-        <thead class="content-table__header">
-
-            <tr class="content-table__header__row">
-                <th>eventId</th>
-                <th>animalId</th>
-                <th>cowId</th>
-                <th>healthIndex</th>
-                <th>endDate</th>
-                <th>minValueDateTime</th>
-                <th>type</th>
-                <th>deletable</th>
-                <th>lactationNumber</th>
-                <th>daysInLactation</th>
-                <th>ageInDays</th>
-                <th>startDateTime</th>
-                <th>reportingDateTime</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody *ngFor=' let item of data' >
-            <tr>
-                <td>{{item.eventId}}</td>
-                <td>{{item.animalId}}</td>
-                <td>{{item.cowId}}</td>
-                <td>{{item.healthIndex}}</td>
-                <td>{{item.endDate}}</td>
-                <td>{{item.minValueDateTime}}</td>
-                <td>{{item.type}}</td>
-                <td>{{item.deletable}}</td>
-                <td>{{item.lactationNumber}}</td>
-                <td>{{item.daysInLactation}}</td>
-                <td>{{item.ageInDays}}</td>
-                <td>{{item.startDateTime}}</td>
-                <td>{{item.reportingDateTime}}</td>
-                <td class="actions">
-                    <button >Edit</button>
-                    <button (click)="delete(item.eventId)">Del</button>
-                </td>
-                
-            </tr>
-
-        </tbody>
-
+  <div class="page-header">
+    <button class="page-header__action" (click)="add()">Add New Row</button>
+  </div>
+  <div class="page-content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>eventId</th>
+          <th>animalId</th>
+          <th>cowId</th>
+          <th>healthIndex</th>
+          <th>endDate</th>
+          <th>minValueDateTime</th>
+          <th>cowEntryStatus</th>
+          <th>newborns</th>
+          <th>type</th>
+          <th>sire</th>
+          <th>deletable</th>
+          <th>interval</th>
+          <th>lactationNumber</th>
+          <th>oldLactationNumber</th>
+          <th>daysInLactation</th>
+          <th>birthDateCalculated</th>
+          <th>ageInDays</th>
+          <th>startDateTime</th>
+          <th>endDateTime</th>
+          <th>reportingDateTime</th>
+          <th>alertType</th>
+          <th>duration</th>
+          <th>originalStartDateTime</th>
+          <th>daysInPregnacy</th>
+          <th>healthIndexPeack</th>
+          <th>newGroupId</th>
+          <th>newGroupName</th>
+          <th>currentGroupName</th>
+          <th>destinationGroup</th>
+          <th>destinationGroupName</th>
+          <th>breedingNumber</th>
+          <th>isOutOfBreedingWindow</th>
+          <th>calvingEase</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of data; index as index">
+        <tr>
+          <td>{{item.eventId}}</td>
+          <ng-container *ngIf="enableEditIndex !== index">
+            <td>{{item.animalId}}</td>
+            <td>{{item.cowId}}</td>
+            <td>{{item.healthIndex}}</td>
+            <td>{{item.endDate}}</td>
+            <td>{{item.minValueDateTime}}</td>
+            <td>{{item.cowEntryStatus}}</td>
+            <td>{{item.newborns}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.sire}}</td>
+            <td>{{item.deletable}}</td>
+            <td>{{item.interval}}</td>
+            <td>{{item.lactationNumber}}</td>
+            <td>{{item.oldLactationNumber}}</td>
+            <td>{{item.daysInLactation}}</td>
+            <td>{{item.birthDateCalculated}}</td>
+            <td>{{item.ageInDays}}</td>
+            <td>{{item.startDateTime}}</td>
+            <td>{{item.endDateTime}}</td>
+            <td>{{item.reportingDateTime}}</td>
+            <td>{{item.alertType}}</td>
+            <td>{{item.duration}}</td>
+            <td>{{item.originalStartDateTime}}</td>
+            <td>{{item.daysInPregnacy}}</td>
+            <td>{{item.healthIndexPeack}}</td>
+            <td>{{item.newGroupId}}</td>
+            <td>{{item.newGroupName}}</td>
+            <td>{{item.currentGroupName}}</td>
+            <td>{{item.destinationGroup}}</td>
+            <td>{{item.destinationGroupName}}</td>
+            <td>{{item.breedingNumber}}</td>
+            <td>{{item.isOutOfBreedingWindow}}</td>
+            <td>{{item.calvingEase}}</td>
+            <td class="actions">
+              <button (click)="delete(item.eventId)">Del</button>
+              <button (click)="switchEditMode(index)">Edit</button>
+            </td>          
+          </ng-container>
+          <ng-container *ngIf="enableEditIndex === index">
+            <td><input type="text" [(ngModel)]="item.animalId" focusable></td>
+            <td><input type="text" [(ngModel)]="item.cowId"></td>
+            <td><input type="text" [(ngModel)]="item.healthIndex"></td>
+            <td><input type="text" [(ngModel)]="item.endDate"></td>
+            <td><input type="text" [(ngModel)]="item.minValueDateTime"></td>
+            <td><input type="text" [(ngModel)]="item.cowEntryStatus"></td>
+            <td><input type="text" [(ngModel)]="item.newborns"></td>
+            <td><input type="text" [(ngModel)]="item.type"></td>
+            <td><input type="text" [(ngModel)]="item.sire"></td>
+            <td><input type="text" [(ngModel)]="item.deletable"></td>
+            <td><input type="text" [(ngModel)]="item.interval"></td>
+            <td><input type="text" [(ngModel)]="item.lactationNumber"></td>
+            <td><input type="text" [(ngModel)]="item.oldLactationNumber"></td>
+            <td><input type="text" [(ngModel)]="item.daysInLactation"></td>
+            <td><input type="text" [(ngModel)]="item.birthDateCalculated"></td>
+            <td><input type="text" [(ngModel)]="item.ageInDays"></td>
+            <td><input type="text" [(ngModel)]="item.startDateTime"></td>
+            <td><input type="text" [(ngModel)]="item.endDateTime"></td>
+            <td><input type="text" [(ngModel)]="item.reportingDateTime"></td>
+            <td><input type="text" [(ngModel)]="item.alertType"></td>
+            <td><input type="text" [(ngModel)]="item.duration"></td>
+            <td><input type="text" [(ngModel)]="item.originalStartDateTime"></td>
+            <td><input type="text" [(ngModel)]="item.daysInPregnacy"></td>
+            <td><input type="text" [(ngModel)]="item.healthIndexPeack"></td>
+            <td><input type="text" [(ngModel)]="item.newGroupId"></td>
+            <td><input type="text" [(ngModel)]="item.newGroupName"></td>
+            <td><input type="text" [(ngModel)]="item.currentGroupName"></td>
+            <td><input type="text" [(ngModel)]="item.destinationGroup"></td>
+            <td><input type="text" [(ngModel)]="item.destinationGroupName"></td>
+            <td><input type="text" [(ngModel)]="item.breedingNumber"></td>
+            <td><input type="text" [(ngModel)]="item.isOutOfBreedingWindow"></td>
+            <td><input type="text" [(ngModel)]="item.calvingEase"></td>
+            <td class="actions">
+              <button (click)="save(item)">Update</button>
+            </td>          
+          </ng-container>        
+        </tr>
+      </ng-container>
+      </tbody>
     </table>
-
-    </div>
-
+  </div>
 </div>
